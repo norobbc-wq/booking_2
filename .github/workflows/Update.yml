@@ -18,6 +18,9 @@ jobs:
         run: pip install requests
 
       - name: Run Scraper
+        env:
+          SUNDAIR_APIKEY: ${{ secrets.SUNDAIR_APIKEY }}
+          SUNDAIR_AUTHORIZATION: ${{ secrets.SUNDAIR_AUTHORIZATION }}
         run: python scraper.py
 
       - name: Commit and Push index.html
