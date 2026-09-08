@@ -1,3 +1,4 @@
+import calendar
 import datetime
 import json
 import os
@@ -37,6 +38,15 @@ if not HEADERS["Apikey"] or not HEADERS["Authorization"]:
     )
 
 
+def add_months(d, months):
+    """يضيف عدد شهور لتاريخ، مع مراعاة اختلاف عدد أيام الشهور."""
+    month_index = d.month - 1 + months
+    year = d.year + month_index // 12
+    month = month_index % 12 + 1
+    day = min(d.day, calendar.monthrange(year, month)[1])
+    return d.replace(year=year, month=month, day=day)
+
+
 def generate_dates(start_date, end_date):
     dates = []
     curr = start_date
@@ -56,26 +66,21 @@ def format_dep_after(date_obj):
 
 
 def extract_time(dt_string):
-    """يحاول يطلع الساعة:الدقيقة من أي تنسيق تاريخ/وقت راجع من الـAPI."""
     if not dt_string:
         return "-"
     try:
-        # يشتغل مع صيغ زي: 2026-11-24T10:00:00+0100 أو ...Z
         cleaned = dt_string.replace("Z", "+00:00")
-        # لو الأوفست من غير ':' زي +0100 نظبطه لـ +01:00
         if len(cleaned) >= 5 and cleaned[-5] in "+-" and ":" not in cleaned[-5:]:
             cleaned = cleaned[:-2] + ":" + cleaned[-2:]
         dt = datetime.datetime.fromisoformat(cleaned)
         return dt.strftime("%H:%M")
     except (ValueError, IndexError):
-        # fallback: نلاقي 'T' ونقص الوقت يدوي
         if "T" in dt_string:
             return dt_string.split("T")[1][:5]
         return "-"
 
 
 def find_flight_number(flt):
-    """يدور على رقم الرحلة تحت أكتر من اسم محتمل للحقل."""
     for key in ("flightNo", "flightNumber", "no", "flightNr", "num"):
         if flt.get(key):
             return flt[key]
@@ -127,8 +132,6 @@ def fetch_flight_for_date(session, dep_code, des_code, f_date, retries=2):
         print(json.dumps(flights[0], ensure_ascii=False, indent=2))
         print("-------------------------------------------")
 
-    # >>> فلترة: نقبل بس الرحلات اللي فعلاً في نفس التاريخ المطلوب
-    # >>> (depAfter بيرجع "من هذا التاريخ فصاعدًا" مش "في هذا التاريخ بالظبط")
     target_date_str = f_date.strftime("%Y-%m-%d")
     matching = [f for f in flights if target_date_str in f.get("depDT", "")]
 
@@ -164,8 +167,8 @@ def fetch_flight_for_date(session, dep_code, des_code, f_date, retries=2):
 
 
 def scrape_sundair():
-    start = datetime.date(2026, 10, 1)
-    end = datetime.date(2027, 3, 31)
+    start = datetime.date.today()
+    end = add_months(start, 6)
     flight_dates = generate_dates(start, end)
 
     results = []
@@ -181,6 +184,7 @@ def scrape_sundair():
 
             results.append(
                 {
+                    "date_iso": f_date.isoformat(),
                     "date": date_str,
                     "day": day_name,
                     "outbound": outbound,
@@ -200,57 +204,71 @@ def scrape_sundair():
             )
             print(f"{date_str} ({day_name}) | ذهاب BER→DAM: {out_txt} | عودة DAM→BER: {in_txt}")
 
-    build_html(results)
+    build_outputs(results)
 
 
-def build_html(data):
+def build_outputs(results):
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
 
-    cards = ""
-    for item in data:
-        out = item["outbound"]
-        inb = item["inbound"]
+    # ------------------------------------------------------------
+    # 1) data.json — بيانات خام يستخدمها الرسم البياني
+    # ------------------------------------------------------------
+    chart_data = {
+        "generated_at": now,
+        "outbound": [
+            {
+                "date": r["date_iso"],
+                "date_display": r["date"],
+                "day": r["day"],
+                "price": r["outbound"]["price"] if r["outbound"]["available"] else None,
+                "flight_no": r["outbound"].get("flight_no") if r["outbound"]["available"] else None,
+            }
+            for r in results
+        ],
+        "inbound": [
+            {
+                "date": r["date_iso"],
+                "date_display": r["date"],
+                "day": r["day"],
+                "price": r["inbound"]["price"] if r["inbound"]["available"] else None,
+                "flight_no": r["inbound"].get("flight_no") if r["inbound"]["available"] else None,
+            }
+            for r in results
+        ],
+    }
+    with open("data.json", "w", encoding="utf-8") as f:
+        json.dump(chart_data, f, ensure_ascii=False, indent=2)
 
-        def leg_html(leg, from_code, to_code, icon_class):
+    # ------------------------------------------------------------
+    # 2) index.html — جدولين (ذهاب / عودة)
+    # ------------------------------------------------------------
+    def build_table_rows(leg_key, from_code, to_code):
+        rows = ""
+        for r in results:
+            leg = r[leg_key]
             if leg["available"]:
-                return f"""
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">{AIRPORT_NAMES[from_code]}</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">{AIRPORT_NAMES[to_code]}</span>
-                    </div>
-                    <div class="leg-flightno">رحلة {leg['flight_no']}</div>
-                    <div class="leg-times">{leg['dep_time']} ← {leg['arr_time']}</div>
-                    <div class="leg-price">{leg['price']:.2f} €</div>
-                </div>
-                """
+                price_html = f'<span class="price-ok">{leg["price"]:.2f} €</span>'
+                flight_html = leg.get("flight_no", "-")
+                status_html = '<span class="status-ok">متاح</span>'
             else:
-                return f"""
-                <div class="leg unavailable">
-                    <div class="leg-route">
-                        <span class="airport">{AIRPORT_NAMES[from_code]}</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">{AIRPORT_NAMES[to_code]}</span>
-                    </div>
-                    <div class="leg-status">غير متوفر</div>
-                </div>
-                """
+                price_html = "-"
+                flight_html = "-"
+                status_html = '<span class="status-bad">غير متوفر</span>'
+            rows += f"""
+            <tr>
+                <td>{r['date']}</td>
+                <td>{r['day']}</td>
+                <td>{flight_html}</td>
+                <td>{price_html}</td>
+                <td>{status_html}</td>
+            </tr>
+            """
+        return rows
 
-        cards += f"""
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">{item['day']}</span>
-                <span class="date-value">{item['date']}</span>
-            </div>
-            <div class="legs-wrap">
-                {leg_html(out, 'BER', 'DAM', 'out')}
-                {leg_html(inb, 'DAM', 'BER', 'in')}
-            </div>
-        </div>
-        """
+    outbound_rows = build_table_rows("outbound", "BER", "DAM")
+    inbound_rows = build_table_rows("inbound", "DAM", "BER")
 
-    html_content = f"""
+    index_html = f"""
     <!DOCTYPE html>
     <html lang="ar" dir="rtl">
     <head>
@@ -267,12 +285,12 @@ def build_html(data):
                 color: #1a1a2e;
             }}
             .page {{
-                max-width: 760px;
+                max-width: 900px;
                 margin: 0 auto;
             }}
             .page-header {{
                 text-align: center;
-                margin-bottom: 24px;
+                margin-bottom: 20px;
             }}
             .page-header h1 {{
                 font-size: 22px;
@@ -288,78 +306,54 @@ def build_html(data):
                 color: #999;
                 margin-top: 6px;
             }}
-            .date-card {{
+            .chart-btn-wrap {{
+                text-align: center;
+                margin-bottom: 28px;
+            }}
+            .chart-btn {{
+                display: inline-block;
+                background: #0b3d91;
+                color: #fff;
+                text-decoration: none;
+                padding: 10px 24px;
+                border-radius: 24px;
+                font-weight: 700;
+                font-size: 14px;
+                box-shadow: 0 3px 10px rgba(11,61,145,0.3);
+            }}
+            .section {{
                 background: #fff;
                 border-radius: 14px;
                 box-shadow: 0 3px 12px rgba(0,0,0,0.07);
-                margin-bottom: 16px;
+                margin-bottom: 24px;
                 overflow: hidden;
             }}
-            .date-header {{
+            .section-header {{
                 background: #ffb400;
-                padding: 10px 18px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
+                padding: 12px 18px;
                 font-weight: 700;
                 color: #fff;
+                font-size: 16px;
             }}
-            .date-header .day-name {{
-                font-size: 15px;
+            table {{
+                width: 100%;
+                border-collapse: collapse;
             }}
-            .date-header .date-value {{
-                font-size: 15px;
-            }}
-            .legs-wrap {{
-                display: flex;
-                flex-wrap: wrap;
-            }}
-            .leg {{
-                flex: 1 1 50%;
-                min-width: 220px;
-                padding: 14px 18px;
+            th, td {{
+                padding: 10px 14px;
+                text-align: center;
                 border-bottom: 1px solid #f0f0f0;
+                font-size: 14px;
             }}
-            .leg:first-child {{
-                border-left: 1px solid #f0f0f0;
-            }}
-            .leg-route {{
-                font-size: 13px;
+            th {{
+                background: #f8f9fb;
                 color: #555;
-                margin-bottom: 4px;
+                font-weight: 600;
             }}
-            .leg-route .arrow {{
-                color: #ffb400;
-                margin: 0 6px;
-            }}
-            .leg-flightno {{
-                font-size: 12px;
-                color: #999;
-                margin-bottom: 2px;
-            }}
-            .leg-times {{
-                font-size: 13px;
-                color: #333;
-                margin-bottom: 6px;
-            }}
-            .leg-price {{
-                font-size: 20px;
-                font-weight: 800;
-                color: #28a745;
-            }}
-            .leg.unavailable .leg-status {{
-                font-size: 15px;
-                font-weight: 700;
-                color: #dc3545;
-                margin-top: 8px;
-            }}
-            .leg.unavailable {{
-                opacity: 0.75;
-            }}
-            @media (max-width: 480px) {{
-                .legs-wrap {{ flex-direction: column; }}
-                .leg:first-child {{ border-left: none; border-bottom: 1px solid #f0f0f0; }}
-            }}
+            tr:hover td {{ background: #fafcff; }}
+            .price-ok {{ color: #28a745; font-weight: 800; }}
+            .status-ok {{ color: #28a745; font-weight: 600; }}
+            .status-bad {{ color: #dc3545; font-weight: 600; }}
         </style>
     </head>
     <body>
@@ -369,13 +363,187 @@ def build_html(data):
                 <div class="route">برلين براندنبورج (BER) ⇄ دمشق (DAM)</div>
                 <div class="updated">آخر تحديث تلقائي: {now}</div>
             </div>
-            {cards}
+
+            <div class="chart-btn-wrap">
+                <a class="chart-btn" href="chart.html">📈 عرض الرسم البياني للأسعار</a>
+            </div>
+
+            <div class="section">
+                <div class="section-header">🛫 رحلات الذهاب (برلين ← دمشق)</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>التاريخ</th><th>اليوم</th><th>رقم الرحلة</th><th>السعر</th><th>الحالة</th>
+                        </tr>
+                    </thead>
+                    <tbody>{outbound_rows}</tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <div class="section-header">🛬 رحلات العودة (دمشق ← برلين)</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>التاريخ</th><th>اليوم</th><th>رقم الرحلة</th><th>السعر</th><th>الحالة</th>
+                        </tr>
+                    </thead>
+                    <tbody>{inbound_rows}</tbody>
+                </table>
+            </div>
         </div>
     </body>
     </html>
     """
     with open("index.html", "w", encoding="utf-8") as f:
-        f.write(html_content)
+        f.write(index_html)
+
+    # ------------------------------------------------------------
+    # 3) chart.html — رسم بياني (خط) للأسعار عبر التواريخ
+    # ------------------------------------------------------------
+    chart_html = f"""
+    <!DOCTYPE html>
+    <html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>الرسم البياني للأسعار | Sundair برلين ⇄ دمشق</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+        <style>
+            * {{ box-sizing: border-box; }}
+            body {{
+                font-family: 'Segoe UI', Tahoma, sans-serif;
+                background: linear-gradient(180deg, #f4f6f9 0%, #e9edf2 100%);
+                margin: 0;
+                padding: 24px 12px;
+                color: #1a1a2e;
+            }}
+            .page {{
+                max-width: 950px;
+                margin: 0 auto;
+            }}
+            .page-header {{
+                text-align: center;
+                margin-bottom: 20px;
+            }}
+            .page-header h1 {{
+                font-size: 22px;
+                color: #0b3d91;
+                margin: 0 0 4px;
+            }}
+            .back-btn {{
+                display: inline-block;
+                margin-bottom: 16px;
+                color: #0b3d91;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 14px;
+            }}
+            .chart-card {{
+                background: #fff;
+                border-radius: 14px;
+                box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+                padding: 18px;
+                margin-bottom: 20px;
+            }}
+            .chart-card h2 {{
+                font-size: 16px;
+                color: #333;
+                margin-top: 0;
+            }}
+            .note {{
+                font-size: 12px;
+                color: #999;
+                text-align: center;
+                margin-top: 10px;
+            }}
+        </style>
+    </head>
+    <body>
+        <div class="page">
+            <a class="back-btn" href="index.html">→ رجوع للجداول</a>
+            <div class="page-header">
+                <h1>📈 الرسم البياني للأسعار</h1>
+                <div>برلين براندنبورج (BER) ⇄ دمشق (DAM)</div>
+            </div>
+
+            <div class="chart-card">
+                <h2>🛫 أسعار رحلات الذهاب (برلين ← دمشق)</h2>
+                <canvas id="outboundChart" height="110"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <h2>🛬 أسعار رحلات العودة (دمشق ← برلين)</h2>
+                <canvas id="inboundChart" height="110"></canvas>
+            </div>
+
+            <div class="note">الفجوات في الخط تعني إن الرحلة غير متوفرة في هذا التاريخ</div>
+        </div>
+
+        <script>
+            fetch('data.json')
+                .then(res => res.json())
+                .then(data => {{
+                    function makeChart(canvasId, series, label, color) {{
+                        const labels = series.map(item => item.date_display);
+                        const prices = series.map(item => item.price);
+
+                        new Chart(document.getElementById(canvasId), {{
+                            type: 'line',
+                            data: {{
+                                labels: labels,
+                                datasets: [{{
+                                    label: label,
+                                    data: prices,
+                                    borderColor: color,
+                                    backgroundColor: color + '33',
+                                    tension: 0.25,
+                                    spanGaps: false,
+                                    pointRadius: 3,
+                                    fill: true,
+                                }}]
+                            }},
+                            options: {{
+                                responsive: true,
+                                plugins: {{
+                                    legend: {{ display: false }},
+                                    tooltip: {{
+                                        callbacks: {{
+                                            label: function(ctx) {{
+                                                const item = series[ctx.dataIndex];
+                                                if (item.price === null) return 'غير متوفر';
+                                                return item.price.toFixed(2) + ' € — رحلة ' + (item.flight_no || '-');
+                                            }}
+                                        }}
+                                    }}
+                                }},
+                                scales: {{
+                                    y: {{
+                                        title: {{ display: true, text: 'السعر (€)' }},
+                                        beginAtZero: false,
+                                    }},
+                                    x: {{
+                                        ticks: {{ maxRotation: 60, minRotation: 45 }}
+                                    }}
+                                }}
+                            }}
+                        }});
+                    }}
+
+                    makeChart('outboundChart', data.outbound, 'ذهاب', '#0b3d91');
+                    makeChart('inboundChart', data.inbound, 'عودة', '#28a745');
+                }})
+                .catch(err => {{
+                    document.querySelector('.page').innerHTML +=
+                        '<p style="color:red; text-align:center;">تعذر تحميل بيانات الرسم البياني.</p>';
+                    console.error(err);
+                }});
+        </script>
+    </body>
+    </html>
+    """
+    with open("chart.html", "w", encoding="utf-8") as f:
+        f.write(chart_html)
 
 
 if __name__ == "__main__":
