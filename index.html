@@ -15,12 +15,12 @@
                 color: #1a1a2e;
             }
             .page {
-                max-width: 760px;
+                max-width: 900px;
                 margin: 0 auto;
             }
             .page-header {
                 text-align: center;
-                margin-bottom: 24px;
+                margin-bottom: 20px;
             }
             .page-header h1 {
                 font-size: 22px;
@@ -36,78 +36,54 @@
                 color: #999;
                 margin-top: 6px;
             }
-            .date-card {
+            .chart-btn-wrap {
+                text-align: center;
+                margin-bottom: 28px;
+            }
+            .chart-btn {
+                display: inline-block;
+                background: #0b3d91;
+                color: #fff;
+                text-decoration: none;
+                padding: 10px 24px;
+                border-radius: 24px;
+                font-weight: 700;
+                font-size: 14px;
+                box-shadow: 0 3px 10px rgba(11,61,145,0.3);
+            }
+            .section {
                 background: #fff;
                 border-radius: 14px;
                 box-shadow: 0 3px 12px rgba(0,0,0,0.07);
-                margin-bottom: 16px;
+                margin-bottom: 24px;
                 overflow: hidden;
             }
-            .date-header {
+            .section-header {
                 background: #ffb400;
-                padding: 10px 18px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
+                padding: 12px 18px;
                 font-weight: 700;
                 color: #fff;
+                font-size: 16px;
             }
-            .date-header .day-name {
-                font-size: 15px;
+            table {
+                width: 100%;
+                border-collapse: collapse;
             }
-            .date-header .date-value {
-                font-size: 15px;
-            }
-            .legs-wrap {
-                display: flex;
-                flex-wrap: wrap;
-            }
-            .leg {
-                flex: 1 1 50%;
-                min-width: 220px;
-                padding: 14px 18px;
+            th, td {
+                padding: 10px 14px;
+                text-align: center;
                 border-bottom: 1px solid #f0f0f0;
+                font-size: 14px;
             }
-            .leg:first-child {
-                border-left: 1px solid #f0f0f0;
-            }
-            .leg-route {
-                font-size: 13px;
+            th {
+                background: #f8f9fb;
                 color: #555;
-                margin-bottom: 4px;
+                font-weight: 600;
             }
-            .leg-route .arrow {
-                color: #ffb400;
-                margin: 0 6px;
-            }
-            .leg-flightno {
-                font-size: 12px;
-                color: #999;
-                margin-bottom: 2px;
-            }
-            .leg-times {
-                font-size: 13px;
-                color: #333;
-                margin-bottom: 6px;
-            }
-            .leg-price {
-                font-size: 20px;
-                font-weight: 800;
-                color: #28a745;
-            }
-            .leg.unavailable .leg-status {
-                font-size: 15px;
-                font-weight: 700;
-                color: #dc3545;
-                margin-top: 8px;
-            }
-            .leg.unavailable {
-                opacity: 0.75;
-            }
-            @media (max-width: 480px) {
-                .legs-wrap { flex-direction: column; }
-                .leg:first-child { border-left: none; border-bottom: 1px solid #f0f0f0; }
-            }
+            tr:hover td { background: #fafcff; }
+            .price-ok { color: #28a745; font-weight: 800; }
+            .status-ok { color: #28a745; font-weight: 600; }
+            .status-bad { color: #dc3545; font-weight: 600; }
         </style>
     </head>
     <body>
@@ -115,1705 +91,868 @@
             <div class="page-header">
                 <h1>✈ أسعار Sundair الحية</h1>
                 <div class="route">برلين براندنبورج (BER) ⇄ دمشق (DAM)</div>
-                <div class="updated">آخر تحديث تلقائي: 2026-09-08 20:38</div>
+                <div class="updated">آخر تحديث تلقائي: 2026-09-08 20:47</div>
             </div>
+
+            <div class="chart-btn-wrap">
+                <a class="chart-btn" href="chart.html">📈 عرض الرسم البياني للأسعار</a>
+            </div>
+
+            <div class="section">
+                <div class="section-header">🛫 رحلات الذهاب (برلين ← دمشق)</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>التاريخ</th><th>اليوم</th><th>رقم الرحلة</th><th>السعر</th><th>الحالة</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            <tr>
+                <td>08.09.2026</td>
+                <td>الثلاثاء</td>
+                <td>-</td>
+                <td>-</td>
+                <td><span class="status-bad">غير متوفر</span></td>
+            </tr>
             
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">03.10.2026</span>
+            <tr>
+                <td>12.09.2026</td>
+                <td>السبت</td>
+                <td>-</td>
+                <td>-</td>
+                <td><span class="status-bad">غير متوفر</span></td>
+            </tr>
+            
+            <tr>
+                <td>15.09.2026</td>
+                <td>الثلاثاء</td>
+                <td>-</td>
+                <td>-</td>
+                <td><span class="status-bad">غير متوفر</span></td>
+            </tr>
+            
+            <tr>
+                <td>19.09.2026</td>
+                <td>السبت</td>
+                <td>-</td>
+                <td>-</td>
+                <td><span class="status-bad">غير متوفر</span></td>
+            </tr>
+            
+            <tr>
+                <td>22.09.2026</td>
+                <td>الثلاثاء</td>
+                <td>-</td>
+                <td>-</td>
+                <td><span class="status-bad">غير متوفر</span></td>
+            </tr>
+            
+            <tr>
+                <td>26.09.2026</td>
+                <td>السبت</td>
+                <td>SR196</td>
+                <td><span class="price-ok">350.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>29.09.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">270.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>03.10.2026</td>
+                <td>السبت</td>
+                <td>SR196</td>
+                <td><span class="price-ok">320.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>06.10.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">300.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>10.10.2026</td>
+                <td>السبت</td>
+                <td>-</td>
+                <td>-</td>
+                <td><span class="status-bad">غير متوفر</span></td>
+            </tr>
+            
+            <tr>
+                <td>13.10.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">400.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>17.10.2026</td>
+                <td>السبت</td>
+                <td>-</td>
+                <td>-</td>
+                <td><span class="status-bad">غير متوفر</span></td>
+            </tr>
+            
+            <tr>
+                <td>20.10.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">370.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>24.10.2026</td>
+                <td>السبت</td>
+                <td>-</td>
+                <td>-</td>
+                <td><span class="status-bad">غير متوفر</span></td>
+            </tr>
+            
+            <tr>
+                <td>27.10.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">260.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>31.10.2026</td>
+                <td>السبت</td>
+                <td>-</td>
+                <td>-</td>
+                <td><span class="status-bad">غير متوفر</span></td>
+            </tr>
+            
+            <tr>
+                <td>03.11.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">250.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>07.11.2026</td>
+                <td>السبت</td>
+                <td>SR196</td>
+                <td><span class="price-ok">230.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>10.11.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">200.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>14.11.2026</td>
+                <td>السبت</td>
+                <td>SR196</td>
+                <td><span class="price-ok">210.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>17.11.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">200.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>21.11.2026</td>
+                <td>السبت</td>
+                <td>SR196</td>
+                <td><span class="price-ok">200.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>24.11.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">180.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>28.11.2026</td>
+                <td>السبت</td>
+                <td>SR196</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>01.12.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">200.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>05.12.2026</td>
+                <td>السبت</td>
+                <td>SR196</td>
+                <td><span class="price-ok">270.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>08.12.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">200.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>12.12.2026</td>
+                <td>السبت</td>
+                <td>SR196</td>
+                <td><span class="price-ok">230.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>15.12.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">230.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>19.12.2026</td>
+                <td>السبت</td>
+                <td>SR196</td>
+                <td><span class="price-ok">330.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>22.12.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">280.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>26.12.2026</td>
+                <td>السبت</td>
+                <td>SR196</td>
+                <td><span class="price-ok">270.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>29.12.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">200.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>02.01.2027</td>
+                <td>السبت</td>
+                <td>SR196</td>
+                <td><span class="price-ok">200.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>05.01.2027</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">200.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>09.01.2027</td>
+                <td>السبت</td>
+                <td>SR196</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>12.01.2027</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>16.01.2027</td>
+                <td>السبت</td>
+                <td>SR196</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>19.01.2027</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">200.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>23.01.2027</td>
+                <td>السبت</td>
+                <td>SR196</td>
+                <td><span class="price-ok">200.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>26.01.2027</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">200.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>30.01.2027</td>
+                <td>السبت</td>
+                <td>SR196</td>
+                <td><span class="price-ok">200.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>02.02.2027</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>06.02.2027</td>
+                <td>السبت</td>
+                <td>SR196</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>09.02.2027</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>13.02.2027</td>
+                <td>السبت</td>
+                <td>SR196</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>16.02.2027</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>20.02.2027</td>
+                <td>السبت</td>
+                <td>SR196</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>23.02.2027</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>27.02.2027</td>
+                <td>السبت</td>
+                <td>SR196</td>
+                <td><span class="price-ok">230.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>02.03.2027</td>
+                <td>الثلاثاء</td>
+                <td>SR124</td>
+                <td><span class="price-ok">230.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>06.03.2027</td>
+                <td>السبت</td>
+                <td>SR196</td>
+                <td><span class="price-ok">240.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <div class="section-header">🛬 رحلات العودة (دمشق ← برلين)</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>التاريخ</th><th>اليوم</th><th>رقم الرحلة</th><th>السعر</th><th>الحالة</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            <tr>
+                <td>08.09.2026</td>
+                <td>الثلاثاء</td>
+                <td>-</td>
+                <td>-</td>
+                <td><span class="status-bad">غير متوفر</span></td>
+            </tr>
+            
+            <tr>
+                <td>12.09.2026</td>
+                <td>السبت</td>
+                <td>-</td>
+                <td>-</td>
+                <td><span class="status-bad">غير متوفر</span></td>
+            </tr>
+            
+            <tr>
+                <td>15.09.2026</td>
+                <td>الثلاثاء</td>
+                <td>-</td>
+                <td>-</td>
+                <td><span class="status-bad">غير متوفر</span></td>
+            </tr>
+            
+            <tr>
+                <td>19.09.2026</td>
+                <td>السبت</td>
+                <td>-</td>
+                <td>-</td>
+                <td><span class="status-bad">غير متوفر</span></td>
+            </tr>
+            
+            <tr>
+                <td>22.09.2026</td>
+                <td>الثلاثاء</td>
+                <td>-</td>
+                <td>-</td>
+                <td><span class="status-bad">غير متوفر</span></td>
+            </tr>
+            
+            <tr>
+                <td>26.09.2026</td>
+                <td>السبت</td>
+                <td>-</td>
+                <td>-</td>
+                <td><span class="status-bad">غير متوفر</span></td>
+            </tr>
+            
+            <tr>
+                <td>29.09.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">400.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>03.10.2026</td>
+                <td>السبت</td>
+                <td>SR197</td>
+                <td><span class="price-ok">390.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>06.10.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">380.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>10.10.2026</td>
+                <td>السبت</td>
+                <td>-</td>
+                <td>-</td>
+                <td><span class="status-bad">غير متوفر</span></td>
+            </tr>
+            
+            <tr>
+                <td>13.10.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">410.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>17.10.2026</td>
+                <td>السبت</td>
+                <td>-</td>
+                <td>-</td>
+                <td><span class="status-bad">غير متوفر</span></td>
+            </tr>
+            
+            <tr>
+                <td>20.10.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">410.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>24.10.2026</td>
+                <td>السبت</td>
+                <td>-</td>
+                <td>-</td>
+                <td><span class="status-bad">غير متوفر</span></td>
+            </tr>
+            
+            <tr>
+                <td>27.10.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">380.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>31.10.2026</td>
+                <td>السبت</td>
+                <td>-</td>
+                <td>-</td>
+                <td><span class="status-bad">غير متوفر</span></td>
+            </tr>
+            
+            <tr>
+                <td>03.11.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">350.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>07.11.2026</td>
+                <td>السبت</td>
+                <td>SR197</td>
+                <td><span class="price-ok">300.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>10.11.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">280.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>14.11.2026</td>
+                <td>السبت</td>
+                <td>SR197</td>
+                <td><span class="price-ok">270.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>17.11.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">250.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>21.11.2026</td>
+                <td>السبت</td>
+                <td>SR197</td>
+                <td><span class="price-ok">260.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>24.11.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">250.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>28.11.2026</td>
+                <td>السبت</td>
+                <td>SR197</td>
+                <td><span class="price-ok">250.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>01.12.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>05.12.2026</td>
+                <td>السبت</td>
+                <td>SR197</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>08.12.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">200.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>12.12.2026</td>
+                <td>السبت</td>
+                <td>SR197</td>
+                <td><span class="price-ok">240.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>15.12.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">200.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>19.12.2026</td>
+                <td>السبت</td>
+                <td>SR197</td>
+                <td><span class="price-ok">200.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>22.12.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">200.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>26.12.2026</td>
+                <td>السبت</td>
+                <td>SR197</td>
+                <td><span class="price-ok">230.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>29.12.2026</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">230.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>02.01.2027</td>
+                <td>السبت</td>
+                <td>SR197</td>
+                <td><span class="price-ok">290.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>05.01.2027</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">260.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>09.01.2027</td>
+                <td>السبت</td>
+                <td>SR197</td>
+                <td><span class="price-ok">300.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>12.01.2027</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">250.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>16.01.2027</td>
+                <td>السبت</td>
+                <td>SR197</td>
+                <td><span class="price-ok">250.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>19.01.2027</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>23.01.2027</td>
+                <td>السبت</td>
+                <td>SR197</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>26.01.2027</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>30.01.2027</td>
+                <td>السبت</td>
+                <td>SR197</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>02.02.2027</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>06.02.2027</td>
+                <td>السبت</td>
+                <td>SR197</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>09.02.2027</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">230.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>13.02.2027</td>
+                <td>السبت</td>
+                <td>SR197</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>16.02.2027</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>20.02.2027</td>
+                <td>السبت</td>
+                <td>SR197</td>
+                <td><span class="price-ok">230.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>23.02.2027</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>27.02.2027</td>
+                <td>السبت</td>
+                <td>SR197</td>
+                <td><span class="price-ok">220.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>02.03.2027</td>
+                <td>الثلاثاء</td>
+                <td>SR125</td>
+                <td><span class="price-ok">230.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            
+            <tr>
+                <td>06.03.2027</td>
+                <td>السبت</td>
+                <td>SR197</td>
+                <td><span class="price-ok">230.00 €</span></td>
+                <td><span class="status-ok">متاح</span></td>
+            </tr>
+            </tbody>
+                </table>
             </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR196</div>
-                    <div class="leg-times">11:00 ← 16:05</div>
-                    <div class="leg-price">320.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR197</div>
-                    <div class="leg-times">17:05 ← 20:30</div>
-                    <div class="leg-price">390.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">06.10.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">11:00 ← 16:05</div>
-                    <div class="leg-price">300.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 20:30</div>
-                    <div class="leg-price">380.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">10.10.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg unavailable">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-status">غير متوفر</div>
-                </div>
-                
-                
-                <div class="leg unavailable">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-status">غير متوفر</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">13.10.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">11:00 ← 16:05</div>
-                    <div class="leg-price">400.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 20:30</div>
-                    <div class="leg-price">410.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">17.10.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg unavailable">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-status">غير متوفر</div>
-                </div>
-                
-                
-                <div class="leg unavailable">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-status">غير متوفر</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">20.10.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">11:00 ← 16:05</div>
-                    <div class="leg-price">370.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 20:30</div>
-                    <div class="leg-price">410.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">24.10.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg unavailable">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-status">غير متوفر</div>
-                </div>
-                
-                
-                <div class="leg unavailable">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-status">غير متوفر</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">27.10.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">260.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">380.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">31.10.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg unavailable">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-status">غير متوفر</div>
-                </div>
-                
-                
-                <div class="leg unavailable">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-status">غير متوفر</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">03.11.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">250.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">350.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">07.11.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR196</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">230.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR197</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">300.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">10.11.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">200.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">280.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">14.11.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR196</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">210.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR197</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">270.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">17.11.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">200.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">250.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">21.11.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR196</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">200.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR197</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">260.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">24.11.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">180.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">250.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">28.11.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR196</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR197</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">250.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">01.12.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">200.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">05.12.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR196</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">270.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR197</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">08.12.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">200.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">200.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">12.12.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR196</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">230.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR197</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">240.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">15.12.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">230.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">200.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">19.12.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR196</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">330.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR197</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">200.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">22.12.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">280.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">200.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">26.12.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR196</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">270.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR197</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">230.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">29.12.2026</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">200.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">230.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">02.01.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR196</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">200.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR197</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">290.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">05.01.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">200.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">260.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">09.01.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR196</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR197</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">300.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">12.01.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">250.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">16.01.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR196</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR197</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">250.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">19.01.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">200.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">23.01.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR196</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">200.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR197</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">26.01.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">200.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">30.01.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR196</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">200.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR197</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">02.02.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">06.02.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR196</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR197</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">09.02.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">230.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">13.02.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR196</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR197</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">16.02.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">20.02.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR196</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR197</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">230.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">23.02.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">27.02.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR196</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">230.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR197</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">02.03.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">230.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">230.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">06.03.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR196</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">240.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR197</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">230.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">09.03.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">230.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">230.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">13.03.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR196</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">230.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR197</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">240.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">16.03.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">240.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">20.03.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR196</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">240.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR197</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">260.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">23.03.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR124</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">220.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR125</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">250.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">السبت</span>
-                <span class="date-value">27.03.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR196</div>
-                    <div class="leg-times">10:00 ← 16:05</div>
-                    <div class="leg-price">240.00 €</div>
-                </div>
-                
-                
-                <div class="leg available">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-flightno">رحلة SR197</div>
-                    <div class="leg-times">17:05 ← 19:30</div>
-                    <div class="leg-price">250.00 €</div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="date-card">
-            <div class="date-header">
-                <span class="day-name">الثلاثاء</span>
-                <span class="date-value">30.03.2027</span>
-            </div>
-            <div class="legs-wrap">
-                
-                <div class="leg unavailable">
-                    <div class="leg-route">
-                        <span class="airport">برلين</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">دمشق</span>
-                    </div>
-                    <div class="leg-status">غير متوفر</div>
-                </div>
-                
-                
-                <div class="leg unavailable">
-                    <div class="leg-route">
-                        <span class="airport">دمشق</span>
-                        <span class="arrow">✈</span>
-                        <span class="airport">برلين</span>
-                    </div>
-                    <div class="leg-status">غير متوفر</div>
-                </div>
-                
-            </div>
-        </div>
-        
         </div>
     </body>
     </html>
