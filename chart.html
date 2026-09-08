@@ -16,7 +16,7 @@
                 color: #1a1a2e;
             }
             .page {
-                max-width: 950px;
+                max-width: 100%;
                 margin: 0 auto;
             }
             .page-header {
@@ -94,13 +94,13 @@
 
             <div class="chart-card" id="outboundCard">
                 <button class="zoom-btn" onclick="toggleFullscreen('outboundCard')">⛶ تكبير</button>
-                <h2>🛫 أسعار رحلات الذهاب (برلين ← دمشق)</h2>
+                <h2>🛫 برلين ← دمشق</h2>
                 <div class="chart-wrap"><canvas id="outboundChart"></canvas></div>
             </div>
 
             <div class="chart-card" id="inboundCard">
                 <button class="zoom-btn" onclick="toggleFullscreen('inboundCard')">⛶ تكبير</button>
-                <h2>🛬 أسعار رحلات العودة (دمشق ← برلين)</h2>
+                <h2>🛬 دمشق ← برلين</h2>
                 <div class="chart-wrap"><canvas id="inboundChart"></canvas></div>
             </div>
 
@@ -155,7 +155,7 @@
                                             label: function(ctx) {
                                                 const item = series[ctx.dataIndex];
                                                 if (item.price === null) return 'غير متوفر';
-                                                return item.price.toFixed(2) + ' € — رحلة ' + (item.flight_no || '-');
+                                                return Math.round(item.price) + ' €';
                                             }
                                         }
                                     }
@@ -173,8 +173,8 @@
                         });
                     }
 
-                    makeChart('outboundChart', data.outbound, 'ذهاب', '#0b3d91');
-                    makeChart('inboundChart', data.inbound, 'عودة', '#28a745');
+                    makeChart('outboundChart', data.outbound, 'BER→DAM', '#0b3d91');
+                    makeChart('inboundChart', data.inbound, 'DAM→BER', '#28a745');
                 })
                 .catch(err => {
                     document.querySelector('.page').innerHTML +=
