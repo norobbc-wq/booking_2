@@ -1,4 +1,5 @@
 import datetime
+import json
 import os
 import time
 import zoneinfo
@@ -8,9 +9,11 @@ import requests
 # إعدادات
 # ============================================================
 BASE_URL = "https://www.sundair.com/rest"
-ORIGIN_AIRPORT = "DAM"       # دمشق
-DEST_AIRPORT = "BER"         # برلين براندنبورج
+AIRPORT_BER = "BER"
+AIRPORT_DAM = "DAM"
 BERLIN_TZ = zoneinfo.ZoneInfo("Europe/Berlin")
+
+AIRPORT_NAMES = {"BER": "برلين", "DAM": "دمشق"}
 
 HEADERS = {
     "Content-Type": "application/json",
@@ -21,11 +24,11 @@ HEADERS = {
     ),
     "Referer": "https://www.sundair.com/booking/",
     "Origin": "https://www.sundair.com",
-    # >>> بتيجي من GitHub Secrets (لتجربة محلية: عرّفهم كمتغيرات بيئة
-    # >>> قبل التشغيل، مش تكتبهم هنا في الكود مباشرة).
     "Apikey": os.environ.get("SUNDAIR_APIKEY", ""),
     "Authorization": os.environ.get("SUNDAIR_AUTHORIZATION", ""),
 }
+
+DEBUG = os.environ.get("SCRAPER_DEBUG", "0") == "1"
 
 if not HEADERS["Apikey"] or not HEADERS["Authorization"]:
     raise SystemExit(
@@ -45,11 +48,6 @@ def generate_dates(start_date, end_date):
 
 
 def format_dep_after(date_obj):
-    """
-    بيحول منتصف ليل التاريخ بتوقيت برلين لـUTC، بنفس منطق
-    moment(date).startOf('day').utc().format('YYYY-MM-DDTHH:mm:ss[Z]')
-    في كود الموقع الأصلي.
-    """
     local_midnight = datetime.datetime.combine(
         date_obj, datetime.time(0, 0, 0), tzinfo=BERLIN_TZ
     )
@@ -57,10 +55,37 @@ def format_dep_after(date_obj):
     return utc_dt.strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def fetch_price_for_date(session, f_date, retries=2):
+def extract_time(dt_string):
+    """يحاول يطلع الساعة:الدقيقة من أي تنسيق تاريخ/وقت راجع من الـAPI."""
+    if not dt_string:
+        return "-"
+    try:
+        # يشتغل مع صيغ زي: 2026-11-24T10:00:00+0100 أو ...Z
+        cleaned = dt_string.replace("Z", "+00:00")
+        # لو الأوفست من غير ':' زي +0100 نظبطه لـ +01:00
+        if len(cleaned) >= 5 and cleaned[-5] in "+-" and ":" not in cleaned[-5:]:
+            cleaned = cleaned[:-2] + ":" + cleaned[-2:]
+        dt = datetime.datetime.fromisoformat(cleaned)
+        return dt.strftime("%H:%M")
+    except (ValueError, IndexError):
+        # fallback: نلاقي 'T' ونقص الوقت يدوي
+        if "T" in dt_string:
+            return dt_string.split("T")[1][:5]
+        return "-"
+
+
+def find_flight_number(flt):
+    """يدور على رقم الرحلة تحت أكتر من اسم محتمل للحقل."""
+    for key in ("flightNo", "flightNumber", "no", "flightNr", "num"):
+        if flt.get(key):
+            return flt[key]
+    return "-"
+
+
+def fetch_flight_for_date(session, dep_code, des_code, f_date, retries=2):
     payload = {
-        "depArprtCode": ORIGIN_AIRPORT,
-        "desArprtCode": DEST_AIRPORT,
+        "depArprtCode": dep_code,
+        "desArprtCode": des_code,
         "noADT": "1",
         "noCHD": "0",
         "noINF": "0",
@@ -71,6 +96,7 @@ def fetch_price_for_date(session, f_date, retries=2):
         "limit": 5,
     }
 
+    resp = None
     for attempt in range(retries + 1):
         try:
             resp = session.put(
@@ -82,40 +108,59 @@ def fetch_price_for_date(session, f_date, retries=2):
             break
         except requests.RequestException as e:
             if attempt == retries:
-                return {"price": None, "status": f"ERROR: {e}"}
+                return {"available": False, "error": str(e)}
             time.sleep(2)
 
     air41_status = resp.headers.get("air41-status")
     if air41_status != "OK":
         error_msg = resp.headers.get("air41-error", "unknown error")
-        return {"price": None, "status": f"NICHT VERFÜGBAR ({error_msg})"}
+        return {"available": False, "error": error_msg}
 
     try:
         data = resp.json()
         flights = data.get("listFlightsRS", {}).get("flts", [])
     except (ValueError, KeyError):
-        return {"price": None, "status": "خطأ في قراءة الرد"}
+        return {"available": False, "error": "خطأ في قراءة الرد"}
 
-    if not flights:
-        return {"price": None, "status": "NICHT VERFÜGBAR"}
+    if DEBUG and flights:
+        print("---- DEBUG: أول رحلة راجعة من الـAPI ----")
+        print(json.dumps(flights[0], ensure_ascii=False, indent=2))
+        print("-------------------------------------------")
 
-    # السعر النهائي لكل رحلة = amnt (سعر الكبير) + tax.tot (الضرائب)
-    prices = []
-    for flt in flights:
+    # >>> فلترة: نقبل بس الرحلات اللي فعلاً في نفس التاريخ المطلوب
+    # >>> (depAfter بيرجع "من هذا التاريخ فصاعدًا" مش "في هذا التاريخ بالظبط")
+    target_date_str = f_date.strftime("%Y-%m-%d")
+    matching = [f for f in flights if target_date_str in f.get("depDT", "")]
+
+    if not matching:
+        return {"available": False, "error": "NICHT VERFÜGBAR"}
+
+    best_flt = None
+    best_price = None
+    for flt in matching:
         prcs = flt.get("prcs", [])
         if not prcs:
             continue
         try:
             amnt = float(prcs[0].get("amnt", 0))
             tax = float(prcs[0].get("tax", {}).get("tot", 0))
-            prices.append(amnt + tax)
+            total = amnt + tax
         except (TypeError, ValueError):
             continue
+        if best_price is None or total < best_price:
+            best_price = total
+            best_flt = flt
 
-    if not prices:
-        return {"price": None, "status": "NICHT VERFÜGBAR"}
+    if best_flt is None:
+        return {"available": False, "error": "NICHT VERFÜGBAR"}
 
-    return {"price": min(prices), "status": "متاح"}
+    return {
+        "available": True,
+        "price": best_price,
+        "flight_no": find_flight_number(best_flt),
+        "dep_time": extract_time(best_flt.get("depDT")),
+        "arr_time": extract_time(best_flt.get("desDT")),
+    }
 
 
 def scrape_sundair():
@@ -129,39 +174,80 @@ def scrape_sundair():
             date_str = f_date.strftime("%d.%m.%Y")
             day_name = "الثلاثاء" if f_date.weekday() == 1 else "السبت"
 
-            result = fetch_price_for_date(session, f_date)
-
-            if result["price"] is not None:
-                price_str = f"{result['price']:.2f} €"
-            else:
-                price_str = "غير متوفر"
+            outbound = fetch_flight_for_date(session, AIRPORT_BER, AIRPORT_DAM, f_date)
+            time.sleep(1)
+            inbound = fetch_flight_for_date(session, AIRPORT_DAM, AIRPORT_BER, f_date)
+            time.sleep(1)
 
             results.append(
                 {
                     "date": date_str,
                     "day": day_name,
-                    "price": price_str,
-                    "status": result["status"],
+                    "outbound": outbound,
+                    "inbound": inbound,
                 }
             )
-            print(f"{date_str}: {price_str} ({result['status']})")
 
-            time.sleep(1)  # احترام الموقع، عدم القصف بطلبات متتالية سريعة
+            out_txt = (
+                f"{outbound['price']:.2f}€ ({outbound['flight_no']})"
+                if outbound["available"]
+                else "غير متوفر"
+            )
+            in_txt = (
+                f"{inbound['price']:.2f}€ ({inbound['flight_no']})"
+                if inbound["available"]
+                else "غير متوفر"
+            )
+            print(f"{date_str} ({day_name}) | ذهاب BER→DAM: {out_txt} | عودة DAM→BER: {in_txt}")
 
     build_html(results)
 
 
 def build_html(data):
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-    rows = ""
+
+    cards = ""
     for item in data:
-        color = "#28a745" if "€" in item["price"] else "#dc3545"
-        rows += f"""
-        <tr>
-            <td><b>{item['day']}</b> {item['date']}</td>
-            <td><span style="color: {color}; font-weight: bold;">{item['price']}</span></td>
-            <td>{item['status']}</td>
-        </tr>
+        out = item["outbound"]
+        inb = item["inbound"]
+
+        def leg_html(leg, from_code, to_code, icon_class):
+            if leg["available"]:
+                return f"""
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">{AIRPORT_NAMES[from_code]}</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">{AIRPORT_NAMES[to_code]}</span>
+                    </div>
+                    <div class="leg-flightno">رحلة {leg['flight_no']}</div>
+                    <div class="leg-times">{leg['dep_time']} ← {leg['arr_time']}</div>
+                    <div class="leg-price">{leg['price']:.2f} €</div>
+                </div>
+                """
+            else:
+                return f"""
+                <div class="leg unavailable">
+                    <div class="leg-route">
+                        <span class="airport">{AIRPORT_NAMES[from_code]}</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">{AIRPORT_NAMES[to_code]}</span>
+                    </div>
+                    <div class="leg-status">غير متوفر</div>
+                </div>
+                """
+
+        cards += f"""
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">{item['day']}</span>
+                <span class="date-value">{item['date']}</span>
+            </div>
+            <div class="legs-wrap">
+                {leg_html(out, 'BER', 'DAM', 'out')}
+                {leg_html(inb, 'DAM', 'BER', 'in')}
+            </div>
+        </div>
         """
 
     html_content = f"""
@@ -170,25 +256,120 @@ def build_html(data):
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>أسعار Sundair الحية</title>
+        <title>أسعار Sundair | برلين ⇄ دمشق</title>
         <style>
-            body {{ font-family: system-ui, sans-serif; padding: 15px; background: #f4f6f9; }}
-            .card {{ background: white; padding: 20px; border-radius: 12px; max-width: 600px; margin: auto; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }}
-            table {{ width: 100%; border-collapse: collapse; margin-top: 15px; }}
-            th, td {{ padding: 10px; border-bottom: 1px solid #eee; text-align: right; }}
-            .updated {{ font-size: 0.8em; color: #666; text-align: center; }}
+            * {{ box-sizing: border-box; }}
+            body {{
+                font-family: 'Segoe UI', Tahoma, sans-serif;
+                background: linear-gradient(180deg, #f4f6f9 0%, #e9edf2 100%);
+                margin: 0;
+                padding: 24px 12px;
+                color: #1a1a2e;
+            }}
+            .page {{
+                max-width: 760px;
+                margin: 0 auto;
+            }}
+            .page-header {{
+                text-align: center;
+                margin-bottom: 24px;
+            }}
+            .page-header h1 {{
+                font-size: 22px;
+                color: #0b3d91;
+                margin: 0 0 4px;
+            }}
+            .page-header .route {{
+                font-size: 15px;
+                color: #555;
+            }}
+            .page-header .updated {{
+                font-size: 12px;
+                color: #999;
+                margin-top: 6px;
+            }}
+            .date-card {{
+                background: #fff;
+                border-radius: 14px;
+                box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+                margin-bottom: 16px;
+                overflow: hidden;
+            }}
+            .date-header {{
+                background: #ffb400;
+                padding: 10px 18px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-weight: 700;
+                color: #fff;
+            }}
+            .date-header .day-name {{
+                font-size: 15px;
+            }}
+            .date-header .date-value {{
+                font-size: 15px;
+            }}
+            .legs-wrap {{
+                display: flex;
+                flex-wrap: wrap;
+            }}
+            .leg {{
+                flex: 1 1 50%;
+                min-width: 220px;
+                padding: 14px 18px;
+                border-bottom: 1px solid #f0f0f0;
+            }}
+            .leg:first-child {{
+                border-left: 1px solid #f0f0f0;
+            }}
+            .leg-route {{
+                font-size: 13px;
+                color: #555;
+                margin-bottom: 4px;
+            }}
+            .leg-route .arrow {{
+                color: #ffb400;
+                margin: 0 6px;
+            }}
+            .leg-flightno {{
+                font-size: 12px;
+                color: #999;
+                margin-bottom: 2px;
+            }}
+            .leg-times {{
+                font-size: 13px;
+                color: #333;
+                margin-bottom: 6px;
+            }}
+            .leg-price {{
+                font-size: 20px;
+                font-weight: 800;
+                color: #28a745;
+            }}
+            .leg.unavailable .leg-status {{
+                font-size: 15px;
+                font-weight: 700;
+                color: #dc3545;
+                margin-top: 8px;
+            }}
+            .leg.unavailable {{
+                opacity: 0.75;
+            }}
+            @media (max-width: 480px) {{
+                .legs-wrap {{ flex-direction: column; }}
+                .leg:first-child {{ border-left: none; border-bottom: 1px solid #f0f0f0; }}
+            }}
         </style>
     </head>
     <body>
-        <div class="card">
-            <h2 style="text-align:center; color:#0056b3;">جدول أسعار Sundair الحية</h2>
-            <p class="updated">آخر تحديث تلقائي: {now}</p>
-            <table>
-                <thead>
-                    <tr><th>التاريخ</th><th>السعر</th><th>الحالة</th></tr>
-                </thead>
-                <tbody>{rows}</tbody>
-            </table>
+        <div class="page">
+            <div class="page-header">
+                <h1>✈ أسعار Sundair الحية</h1>
+                <div class="route">برلين براندنبورج (BER) ⇄ دمشق (DAM)</div>
+                <div class="updated">آخر تحديث تلقائي: {now}</div>
+            </div>
+            {cards}
         </div>
     </body>
     </html>
