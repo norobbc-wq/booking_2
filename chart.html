@@ -42,11 +42,39 @@
                 box-shadow: 0 3px 12px rgba(0,0,0,0.07);
                 padding: 18px;
                 margin-bottom: 20px;
+                position: relative;
             }
             .chart-card h2 {
                 font-size: 16px;
                 color: #333;
                 margin-top: 0;
+                display: inline-block;
+            }
+            .zoom-btn {
+                float: left;
+                background: #f0f4fa;
+                border: none;
+                border-radius: 8px;
+                padding: 6px 14px;
+                font-size: 13px;
+                font-weight: 600;
+                color: #0b3d91;
+                cursor: pointer;
+            }
+            .zoom-btn:hover { background: #e2eafc; }
+            .chart-wrap {
+                position: relative;
+                height: 480px;
+            }
+            .chart-card:fullscreen {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: 30px;
+                background: #fff;
+            }
+            .chart-card:fullscreen .chart-wrap {
+                height: 85vh;
             }
             .note {
                 font-size: 12px;
@@ -58,26 +86,42 @@
     </head>
     <body>
         <div class="page">
-            <a class="back-btn" href="index.html">→ رجوع للجداول</a>
+            <a class="back-btn" href="index.html">→ رجوع للجدول</a>
             <div class="page-header">
                 <h1>📈 الرسم البياني للأسعار</h1>
                 <div>برلين براندنبورج (BER) ⇄ دمشق (DAM)</div>
             </div>
 
-            <div class="chart-card">
+            <div class="chart-card" id="outboundCard">
+                <button class="zoom-btn" onclick="toggleFullscreen('outboundCard')">⛶ تكبير</button>
                 <h2>🛫 أسعار رحلات الذهاب (برلين ← دمشق)</h2>
-                <canvas id="outboundChart" height="110"></canvas>
+                <div class="chart-wrap"><canvas id="outboundChart"></canvas></div>
             </div>
 
-            <div class="chart-card">
+            <div class="chart-card" id="inboundCard">
+                <button class="zoom-btn" onclick="toggleFullscreen('inboundCard')">⛶ تكبير</button>
                 <h2>🛬 أسعار رحلات العودة (دمشق ← برلين)</h2>
-                <canvas id="inboundChart" height="110"></canvas>
+                <div class="chart-wrap"><canvas id="inboundChart"></canvas></div>
             </div>
 
-            <div class="note">الفجوات في الخط تعني إن الرحلة غير متوفرة في هذا التاريخ</div>
+            <div class="note">الفجوات في الخط تعني إن الرحلة غير متوفرة في هذا التاريخ — اضغط "تكبير" لعرض أوضح بملء الشاشة</div>
         </div>
 
         <script>
+            function toggleFullscreen(cardId) {
+                const el = document.getElementById(cardId);
+                if (!document.fullscreenElement) {
+                    (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+                } else {
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                }
+            }
+
+            const charts = {};
+            document.addEventListener('fullscreenchange', () => {
+                Object.values(charts).forEach(c => c.resize());
+            });
+
             fetch('data.json')
                 .then(res => res.json())
                 .then(data => {
@@ -85,7 +129,7 @@
                         const labels = series.map(item => item.date_display);
                         const prices = series.map(item => item.price);
 
-                        new Chart(document.getElementById(canvasId), {
+                        charts[canvasId] = new Chart(document.getElementById(canvasId), {
                             type: 'line',
                             data: {
                                 labels: labels,
@@ -96,12 +140,14 @@
                                     backgroundColor: color + '33',
                                     tension: 0.25,
                                     spanGaps: false,
-                                    pointRadius: 3,
+                                    pointRadius: 4,
+                                    borderWidth: 3,
                                     fill: true,
                                 }]
                             },
                             options: {
                                 responsive: true,
+                                maintainAspectRatio: false,
                                 plugins: {
                                     legend: { display: false },
                                     tooltip: {
