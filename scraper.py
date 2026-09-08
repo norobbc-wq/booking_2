@@ -208,7 +208,7 @@ def scrape_sundair():
 
 
 def build_outputs(results):
-    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+    now = datetime.datetime.now(BERLIN_TZ).strftime("%Y-%m-%d %H:%M")
 
     # ------------------------------------------------------------
     # 1) data.json — بيانات خام يستخدمها الرسم البياني
@@ -240,24 +240,22 @@ def build_outputs(results):
         json.dump(chart_data, f, ensure_ascii=False, indent=2)
 
     # ------------------------------------------------------------
-    # 2) index.html — جدول واحد: الذهاب والعودة جنب بعض لكل تاريخ
+    # 2) index.html — جدول واحد: الرحلتين جنب بعض لكل تاريخ
     # ------------------------------------------------------------
-    def leg_cells(leg):
+    def leg_price(leg):
         if leg["available"]:
-            return leg.get("flight_no", "-"), f'<span class="price-ok">{leg["price"]:.2f} €</span>'
-        return "-", '<span class="price-na">-</span>'
+            return f'<span class="price-ok">{round(leg["price"])}</span>'
+        return '<span class="price-na">-</span>'
 
     table_rows = ""
     for r in results:
-        out_flight, out_price = leg_cells(r["outbound"])
-        in_flight, in_price = leg_cells(r["inbound"])
+        out_price = leg_price(r["outbound"])
+        in_price = leg_price(r["inbound"])
         table_rows += f"""
         <tr>
             <td>{r['date']}</td>
             <td>{r['day']}</td>
-            <td>{out_flight}</td>
             <td>{out_price}</td>
-            <td>{in_flight}</td>
             <td>{in_price}</td>
         </tr>
         """
@@ -350,7 +348,7 @@ def build_outputs(results):
             <div class="page-header">
                 <h1>✈ أسعار Sundair الحية</h1>
                 <div class="route">برلين براندنبورج (BER) ⇄ دمشق (DAM)</div>
-                <div class="updated">آخر تحديث تلقائي: {now}</div>
+                <div class="updated">آخر تحديث تلقائي: {now} (بتوقيت ألمانيا)</div>
             </div>
 
             <div class="chart-btn-wrap">
@@ -363,14 +361,12 @@ def build_outputs(results):
                         <tr>
                             <th rowspan="2">التاريخ</th>
                             <th rowspan="2">اليوم</th>
-                            <th colspan="2" class="group-out">🛫 الذهاب (برلين ← دمشق)</th>
-                            <th colspan="2" class="group-in">🛬 العودة (دمشق ← برلين)</th>
+                            <th class="group-out">🛫 برلين ← دمشق</th>
+                            <th class="group-in">🛬 دمشق ← برلين</th>
                         </tr>
                         <tr>
-                            <th class="group-out">رقم الرحلة</th>
-                            <th class="group-out">السعر</th>
-                            <th class="group-in">رقم الرحلة</th>
-                            <th class="group-in">السعر</th>
+                            <th class="group-out">السعر €</th>
+                            <th class="group-in">السعر €</th>
                         </tr>
                     </thead>
                     <tbody>{table_rows}</tbody>
@@ -404,7 +400,7 @@ def build_outputs(results):
                 color: #1a1a2e;
             }}
             .page {{
-                max-width: 950px;
+                max-width: 100%;
                 margin: 0 auto;
             }}
             .page-header {{
@@ -482,13 +478,13 @@ def build_outputs(results):
 
             <div class="chart-card" id="outboundCard">
                 <button class="zoom-btn" onclick="toggleFullscreen('outboundCard')">⛶ تكبير</button>
-                <h2>🛫 أسعار رحلات الذهاب (برلين ← دمشق)</h2>
+                <h2>🛫 برلين ← دمشق</h2>
                 <div class="chart-wrap"><canvas id="outboundChart"></canvas></div>
             </div>
 
             <div class="chart-card" id="inboundCard">
                 <button class="zoom-btn" onclick="toggleFullscreen('inboundCard')">⛶ تكبير</button>
-                <h2>🛬 أسعار رحلات العودة (دمشق ← برلين)</h2>
+                <h2>🛬 دمشق ← برلين</h2>
                 <div class="chart-wrap"><canvas id="inboundChart"></canvas></div>
             </div>
 
@@ -543,7 +539,7 @@ def build_outputs(results):
                                             label: function(ctx) {{
                                                 const item = series[ctx.dataIndex];
                                                 if (item.price === null) return 'غير متوفر';
-                                                return item.price.toFixed(2) + ' € — رحلة ' + (item.flight_no || '-');
+                                                return Math.round(item.price) + ' €';
                                             }}
                                         }}
                                     }}
@@ -561,8 +557,8 @@ def build_outputs(results):
                         }});
                     }}
 
-                    makeChart('outboundChart', data.outbound, 'ذهاب', '#0b3d91');
-                    makeChart('inboundChart', data.inbound, 'عودة', '#28a745');
+                    makeChart('outboundChart', data.outbound, 'BER→DAM', '#0b3d91');
+                    makeChart('inboundChart', data.inbound, 'DAM→BER', '#28a745');
                 }})
                 .catch(err => {{
                     document.querySelector('.page').innerHTML +=
