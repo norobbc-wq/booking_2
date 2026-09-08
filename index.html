@@ -4,337 +4,1816 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>أسعار Sundair الحية</title>
+        <title>أسعار Sundair | برلين ⇄ دمشق</title>
         <style>
-            body { font-family: system-ui, sans-serif; padding: 15px; background: #f4f6f9; }
-            .card { background: white; padding: 20px; border-radius: 12px; max-width: 600px; margin: auto; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-            table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-            th, td { padding: 10px; border-bottom: 1px solid #eee; text-align: right; }
-            .updated { font-size: 0.8em; color: #666; text-align: center; }
+            * { box-sizing: border-box; }
+            body {
+                font-family: 'Segoe UI', Tahoma, sans-serif;
+                background: linear-gradient(180deg, #f4f6f9 0%, #e9edf2 100%);
+                margin: 0;
+                padding: 24px 12px;
+                color: #1a1a2e;
+            }
+            .page {
+                max-width: 760px;
+                margin: 0 auto;
+            }
+            .page-header {
+                text-align: center;
+                margin-bottom: 24px;
+            }
+            .page-header h1 {
+                font-size: 22px;
+                color: #0b3d91;
+                margin: 0 0 4px;
+            }
+            .page-header .route {
+                font-size: 15px;
+                color: #555;
+            }
+            .page-header .updated {
+                font-size: 12px;
+                color: #999;
+                margin-top: 6px;
+            }
+            .date-card {
+                background: #fff;
+                border-radius: 14px;
+                box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+                margin-bottom: 16px;
+                overflow: hidden;
+            }
+            .date-header {
+                background: #ffb400;
+                padding: 10px 18px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-weight: 700;
+                color: #fff;
+            }
+            .date-header .day-name {
+                font-size: 15px;
+            }
+            .date-header .date-value {
+                font-size: 15px;
+            }
+            .legs-wrap {
+                display: flex;
+                flex-wrap: wrap;
+            }
+            .leg {
+                flex: 1 1 50%;
+                min-width: 220px;
+                padding: 14px 18px;
+                border-bottom: 1px solid #f0f0f0;
+            }
+            .leg:first-child {
+                border-left: 1px solid #f0f0f0;
+            }
+            .leg-route {
+                font-size: 13px;
+                color: #555;
+                margin-bottom: 4px;
+            }
+            .leg-route .arrow {
+                color: #ffb400;
+                margin: 0 6px;
+            }
+            .leg-flightno {
+                font-size: 12px;
+                color: #999;
+                margin-bottom: 2px;
+            }
+            .leg-times {
+                font-size: 13px;
+                color: #333;
+                margin-bottom: 6px;
+            }
+            .leg-price {
+                font-size: 20px;
+                font-weight: 800;
+                color: #28a745;
+            }
+            .leg.unavailable .leg-status {
+                font-size: 15px;
+                font-weight: 700;
+                color: #dc3545;
+                margin-top: 8px;
+            }
+            .leg.unavailable {
+                opacity: 0.75;
+            }
+            @media (max-width: 480px) {
+                .legs-wrap { flex-direction: column; }
+                .leg:first-child { border-left: none; border-bottom: 1px solid #f0f0f0; }
+            }
         </style>
     </head>
     <body>
-        <div class="card">
-            <h2 style="text-align:center; color:#0056b3;">جدول أسعار Sundair الحية</h2>
-            <p class="updated">آخر تحديث تلقائي: 2026-09-08 20:17</p>
-            <table>
-                <thead>
-                    <tr><th>التاريخ</th><th>السعر</th><th>الحالة</th></tr>
-                </thead>
-                <tbody>
-        <tr>
-            <td><b>السبت</b> 03.10.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">380.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="page">
+            <div class="page-header">
+                <h1>✈ أسعار Sundair الحية</h1>
+                <div class="route">برلين براندنبورج (BER) ⇄ دمشق (DAM)</div>
+                <div class="updated">آخر تحديث تلقائي: 2026-09-08 20:30</div>
+            </div>
+            
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">03.10.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR196</div>
+                    <div class="leg-times">11:00 ← 16:05</div>
+                    <div class="leg-price">320.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR197</div>
+                    <div class="leg-times">17:05 ← 20:30</div>
+                    <div class="leg-price">390.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 06.10.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">380.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">06.10.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">11:00 ← 16:05</div>
+                    <div class="leg-price">300.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 20:30</div>
+                    <div class="leg-price">380.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 10.10.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">350.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">10.10.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg unavailable">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-status">غير متوفر</div>
+                </div>
+                
+                
+                <div class="leg unavailable">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-status">غير متوفر</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 13.10.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">300.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">13.10.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">11:00 ← 16:05</div>
+                    <div class="leg-price">400.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 20:30</div>
+                    <div class="leg-price">410.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 17.10.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">280.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">17.10.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg unavailable">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-status">غير متوفر</div>
+                </div>
+                
+                
+                <div class="leg unavailable">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-status">غير متوفر</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 20.10.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">280.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">20.10.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">11:00 ← 16:05</div>
+                    <div class="leg-price">370.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 20:30</div>
+                    <div class="leg-price">410.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 24.10.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">270.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">24.10.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg unavailable">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-status">غير متوفر</div>
+                </div>
+                
+                
+                <div class="leg unavailable">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-status">غير متوفر</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 27.10.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">270.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">27.10.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">260.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">380.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 31.10.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">250.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">31.10.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg unavailable">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-status">غير متوفر</div>
+                </div>
+                
+                
+                <div class="leg unavailable">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-status">غير متوفر</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 03.11.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">250.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">03.11.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">250.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">350.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 07.11.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">250.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">07.11.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR196</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">230.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR197</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">300.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 10.11.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">250.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">10.11.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">200.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">280.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 14.11.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">250.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">14.11.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR196</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">210.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR197</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">270.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 17.11.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">220.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">17.11.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">200.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">250.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 21.11.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">220.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">21.11.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR196</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">200.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR197</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">260.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 24.11.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">200.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">24.11.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">180.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">250.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 28.11.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">200.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">28.11.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR196</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR197</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">250.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 01.12.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">200.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">01.12.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">200.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 05.12.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">200.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">05.12.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR196</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">270.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR197</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 08.12.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">200.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">08.12.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">200.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">200.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 12.12.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">200.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">12.12.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR196</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">230.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR197</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">240.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 15.12.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">200.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">15.12.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">230.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">200.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 19.12.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">200.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">19.12.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR196</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">330.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR197</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">200.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 22.12.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">200.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">22.12.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">280.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">200.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 26.12.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">230.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">26.12.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR196</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">270.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR197</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">230.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 29.12.2026</td>
-            <td><span style="color: #28a745; font-weight: bold;">230.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">29.12.2026</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">200.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">230.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 02.01.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">250.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">02.01.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR196</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">200.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR197</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">290.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 05.01.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">220.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">05.01.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">200.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">260.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 09.01.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">220.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">09.01.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR196</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR197</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">300.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 12.01.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">220.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">12.01.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">250.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 16.01.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">220.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">16.01.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR196</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR197</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">250.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 19.01.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">220.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">19.01.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">200.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 23.01.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">220.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">23.01.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR196</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">200.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR197</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 26.01.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">220.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">26.01.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">200.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 30.01.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">220.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">30.01.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR196</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">200.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR197</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 02.02.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">220.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">02.02.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 06.02.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">220.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">06.02.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR196</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR197</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 09.02.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">220.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">09.02.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">230.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 13.02.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">220.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">13.02.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR196</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR197</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 16.02.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">220.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">16.02.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 20.02.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">220.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">20.02.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR196</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR197</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">230.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 23.02.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">220.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">23.02.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 27.02.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">220.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">27.02.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR196</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">230.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR197</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 02.03.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">230.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">02.03.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">230.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">230.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 06.03.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">230.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">06.03.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR196</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">240.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR197</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">230.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 09.03.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">230.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">09.03.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">230.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">230.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 13.03.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">240.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">13.03.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR196</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">230.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR197</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">240.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 16.03.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">240.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">16.03.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">240.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 20.03.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">250.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">20.03.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR196</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">240.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR197</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">260.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 23.03.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">250.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">23.03.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR124</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">220.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR125</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">250.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>السبت</b> 27.03.2027</td>
-            <td><span style="color: #28a745; font-weight: bold;">250.00 €</span></td>
-            <td>متاح</td>
-        </tr>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">السبت</span>
+                <span class="date-value">27.03.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR196</div>
+                    <div class="leg-times">10:00 ← 16:05</div>
+                    <div class="leg-price">240.00 €</div>
+                </div>
+                
+                
+                <div class="leg available">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-flightno">رحلة SR197</div>
+                    <div class="leg-times">17:05 ← 19:30</div>
+                    <div class="leg-price">250.00 €</div>
+                </div>
+                
+            </div>
+        </div>
         
-        <tr>
-            <td><b>الثلاثاء</b> 30.03.2027</td>
-            <td><span style="color: #dc3545; font-weight: bold;">غير متوفر</span></td>
-            <td>NICHT VERFÜGBAR (NO FLIGHTS)</td>
-        </tr>
-        </tbody>
-            </table>
+        <div class="date-card">
+            <div class="date-header">
+                <span class="day-name">الثلاثاء</span>
+                <span class="date-value">30.03.2027</span>
+            </div>
+            <div class="legs-wrap">
+                
+                <div class="leg unavailable">
+                    <div class="leg-route">
+                        <span class="airport">برلين</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">دمشق</span>
+                    </div>
+                    <div class="leg-status">غير متوفر</div>
+                </div>
+                
+                
+                <div class="leg unavailable">
+                    <div class="leg-route">
+                        <span class="airport">دمشق</span>
+                        <span class="arrow">✈</span>
+                        <span class="airport">برلين</span>
+                    </div>
+                    <div class="leg-status">غير متوفر</div>
+                </div>
+                
+            </div>
+        </div>
+        
         </div>
     </body>
     </html>
