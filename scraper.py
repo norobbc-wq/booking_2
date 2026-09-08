@@ -240,33 +240,27 @@ def build_outputs(results):
         json.dump(chart_data, f, ensure_ascii=False, indent=2)
 
     # ------------------------------------------------------------
-    # 2) index.html — جدولين (ذهاب / عودة)
+    # 2) index.html — جدول واحد: الذهاب والعودة جنب بعض لكل تاريخ
     # ------------------------------------------------------------
-    def build_table_rows(leg_key, from_code, to_code):
-        rows = ""
-        for r in results:
-            leg = r[leg_key]
-            if leg["available"]:
-                price_html = f'<span class="price-ok">{leg["price"]:.2f} €</span>'
-                flight_html = leg.get("flight_no", "-")
-                status_html = '<span class="status-ok">متاح</span>'
-            else:
-                price_html = "-"
-                flight_html = "-"
-                status_html = '<span class="status-bad">غير متوفر</span>'
-            rows += f"""
-            <tr>
-                <td>{r['date']}</td>
-                <td>{r['day']}</td>
-                <td>{flight_html}</td>
-                <td>{price_html}</td>
-                <td>{status_html}</td>
-            </tr>
-            """
-        return rows
+    def leg_cells(leg):
+        if leg["available"]:
+            return leg.get("flight_no", "-"), f'<span class="price-ok">{leg["price"]:.2f} €</span>'
+        return "-", '<span class="price-na">-</span>'
 
-    outbound_rows = build_table_rows("outbound", "BER", "DAM")
-    inbound_rows = build_table_rows("inbound", "DAM", "BER")
+    table_rows = ""
+    for r in results:
+        out_flight, out_price = leg_cells(r["outbound"])
+        in_flight, in_price = leg_cells(r["inbound"])
+        table_rows += f"""
+        <tr>
+            <td>{r['date']}</td>
+            <td>{r['day']}</td>
+            <td>{out_flight}</td>
+            <td>{out_price}</td>
+            <td>{in_flight}</td>
+            <td>{in_price}</td>
+        </tr>
+        """
 
     index_html = f"""
     <!DOCTYPE html>
@@ -285,7 +279,7 @@ def build_outputs(results):
                 color: #1a1a2e;
             }}
             .page {{
-                max-width: 900px;
+                max-width: 950px;
                 margin: 0 auto;
             }}
             .page-header {{
@@ -328,13 +322,6 @@ def build_outputs(results):
                 margin-bottom: 24px;
                 overflow: hidden;
             }}
-            .section-header {{
-                background: #ffb400;
-                padding: 12px 18px;
-                font-weight: 700;
-                color: #fff;
-                font-size: 16px;
-            }}
             table {{
                 width: 100%;
                 border-collapse: collapse;
@@ -350,10 +337,12 @@ def build_outputs(results):
                 color: #555;
                 font-weight: 600;
             }}
+            thead .group-out {{ color: #0b3d91; }}
+            thead .group-in {{ color: #28a745; }}
             tr:hover td {{ background: #fafcff; }}
             .price-ok {{ color: #28a745; font-weight: 800; }}
-            .status-ok {{ color: #28a745; font-weight: 600; }}
-            .status-bad {{ color: #dc3545; font-weight: 600; }}
+            .price-na {{ color: #bbb; font-weight: 600; }}
+            td:nth-child(3), td:nth-child(4) {{ border-left: 2px solid #f0f0f0; }}
         </style>
     </head>
     <body>
@@ -369,26 +358,22 @@ def build_outputs(results):
             </div>
 
             <div class="section">
-                <div class="section-header">🛫 رحلات الذهاب (برلين ← دمشق)</div>
                 <table>
                     <thead>
                         <tr>
-                            <th>التاريخ</th><th>اليوم</th><th>رقم الرحلة</th><th>السعر</th><th>الحالة</th>
+                            <th rowspan="2">التاريخ</th>
+                            <th rowspan="2">اليوم</th>
+                            <th colspan="2" class="group-out">🛫 الذهاب (برلين ← دمشق)</th>
+                            <th colspan="2" class="group-in">🛬 العودة (دمشق ← برلين)</th>
                         </tr>
-                    </thead>
-                    <tbody>{outbound_rows}</tbody>
-                </table>
-            </div>
-
-            <div class="section">
-                <div class="section-header">🛬 رحلات العودة (دمشق ← برلين)</div>
-                <table>
-                    <thead>
                         <tr>
-                            <th>التاريخ</th><th>اليوم</th><th>رقم الرحلة</th><th>السعر</th><th>الحالة</th>
+                            <th class="group-out">رقم الرحلة</th>
+                            <th class="group-out">السعر</th>
+                            <th class="group-in">رقم الرحلة</th>
+                            <th class="group-in">السعر</th>
                         </tr>
                     </thead>
-                    <tbody>{inbound_rows}</tbody>
+                    <tbody>{table_rows}</tbody>
                 </table>
             </div>
         </div>
@@ -445,11 +430,39 @@ def build_outputs(results):
                 box-shadow: 0 3px 12px rgba(0,0,0,0.07);
                 padding: 18px;
                 margin-bottom: 20px;
+                position: relative;
             }}
             .chart-card h2 {{
                 font-size: 16px;
                 color: #333;
                 margin-top: 0;
+                display: inline-block;
+            }}
+            .zoom-btn {{
+                float: left;
+                background: #f0f4fa;
+                border: none;
+                border-radius: 8px;
+                padding: 6px 14px;
+                font-size: 13px;
+                font-weight: 600;
+                color: #0b3d91;
+                cursor: pointer;
+            }}
+            .zoom-btn:hover {{ background: #e2eafc; }}
+            .chart-wrap {{
+                position: relative;
+                height: 480px;
+            }}
+            .chart-card:fullscreen {{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: 30px;
+                background: #fff;
+            }}
+            .chart-card:fullscreen .chart-wrap {{
+                height: 85vh;
             }}
             .note {{
                 font-size: 12px;
@@ -461,26 +474,42 @@ def build_outputs(results):
     </head>
     <body>
         <div class="page">
-            <a class="back-btn" href="index.html">→ رجوع للجداول</a>
+            <a class="back-btn" href="index.html">→ رجوع للجدول</a>
             <div class="page-header">
                 <h1>📈 الرسم البياني للأسعار</h1>
                 <div>برلين براندنبورج (BER) ⇄ دمشق (DAM)</div>
             </div>
 
-            <div class="chart-card">
+            <div class="chart-card" id="outboundCard">
+                <button class="zoom-btn" onclick="toggleFullscreen('outboundCard')">⛶ تكبير</button>
                 <h2>🛫 أسعار رحلات الذهاب (برلين ← دمشق)</h2>
-                <canvas id="outboundChart" height="110"></canvas>
+                <div class="chart-wrap"><canvas id="outboundChart"></canvas></div>
             </div>
 
-            <div class="chart-card">
+            <div class="chart-card" id="inboundCard">
+                <button class="zoom-btn" onclick="toggleFullscreen('inboundCard')">⛶ تكبير</button>
                 <h2>🛬 أسعار رحلات العودة (دمشق ← برلين)</h2>
-                <canvas id="inboundChart" height="110"></canvas>
+                <div class="chart-wrap"><canvas id="inboundChart"></canvas></div>
             </div>
 
-            <div class="note">الفجوات في الخط تعني إن الرحلة غير متوفرة في هذا التاريخ</div>
+            <div class="note">الفجوات في الخط تعني إن الرحلة غير متوفرة في هذا التاريخ — اضغط "تكبير" لعرض أوضح بملء الشاشة</div>
         </div>
 
         <script>
+            function toggleFullscreen(cardId) {{
+                const el = document.getElementById(cardId);
+                if (!document.fullscreenElement) {{
+                    (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+                }} else {{
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                }}
+            }}
+
+            const charts = {{}};
+            document.addEventListener('fullscreenchange', () => {{
+                Object.values(charts).forEach(c => c.resize());
+            }});
+
             fetch('data.json')
                 .then(res => res.json())
                 .then(data => {{
@@ -488,7 +517,7 @@ def build_outputs(results):
                         const labels = series.map(item => item.date_display);
                         const prices = series.map(item => item.price);
 
-                        new Chart(document.getElementById(canvasId), {{
+                        charts[canvasId] = new Chart(document.getElementById(canvasId), {{
                             type: 'line',
                             data: {{
                                 labels: labels,
@@ -499,12 +528,14 @@ def build_outputs(results):
                                     backgroundColor: color + '33',
                                     tension: 0.25,
                                     spanGaps: false,
-                                    pointRadius: 3,
+                                    pointRadius: 4,
+                                    borderWidth: 3,
                                     fill: true,
                                 }}]
                             }},
                             options: {{
                                 responsive: true,
+                                maintainAspectRatio: false,
                                 plugins: {{
                                     legend: {{ display: false }},
                                     tooltip: {{
