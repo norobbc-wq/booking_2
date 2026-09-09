@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09 10:18",
+  "generated_at": "2026-09-09 12:17",
   "outbound": [
     {
       "date": "2026-09-12",
@@ -385,8 +385,8 @@
       "date": "2026-09-19",
       "date_display": "19.09.2026",
       "day": "السبت",
-      "price": 500.0,
-      "flight_no": "SR197"
+      "price": null,
+      "flight_no": null
     },
     {
       "date": "2026-09-22",
