@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-15 13:27",
+  "generated_at": "2026-09-15 18:39",
   "outbound": [
     {
       "date": "2026-09-15",
@@ -26,22 +26,22 @@
       "date": "2026-09-26",
       "date_display": "26.09.2026",
       "day": "السبت",
-      "price": 370.0,
-      "flight_no": "SR196"
+      "price": null,
+      "flight_no": null
     },
     {
       "date": "2026-09-29",
       "date_display": "29.09.2026",
       "day": "الثلاثاء",
-      "price": 360.0,
-      "flight_no": "SR124"
+      "price": null,
+      "flight_no": null
     },
     {
       "date": "2026-10-03",
       "date_display": "03.10.2026",
       "day": "السبت",
-      "price": 400.0,
-      "flight_no": "SR196"
+      "price": null,
+      "flight_no": null
     },
     {
       "date": "2026-10-06",
@@ -385,8 +385,8 @@
       "date": "2026-09-22",
       "date_display": "22.09.2026",
       "day": "الثلاثاء",
-      "price": 520.0,
-      "flight_no": "SR125"
+      "price": null,
+      "flight_no": null
     },
     {
       "date": "2026-09-26",
