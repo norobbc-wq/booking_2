@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13 00:51",
+  "generated_at": "2026-10-13 08:15",
   "outbound": [
     {
       "date": "2026-10-13",
@@ -364,6 +364,13 @@
       "day": "السبت",
       "price": 260.0,
       "flight_no": "SR196"
+    },
+    {
+      "date": "2027-04-13",
+      "date_display": "13.04.2027",
+      "day": "الثلاثاء",
+      "price": 270.0,
+      "flight_no": "SR124"
     }
   ],
   "inbound": [
@@ -730,6 +737,13 @@
       "day": "السبت",
       "price": 270.0,
       "flight_no": "SR197"
+    },
+    {
+      "date": "2027-04-13",
+      "date_display": "13.04.2027",
+      "day": "الثلاثاء",
+      "price": 250.0,
+      "flight_no": "SR125"
     }
   ]
 }
