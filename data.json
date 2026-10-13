@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13 17:46",
+  "generated_at": "2026-10-13 23:07",
   "outbound": [
     {
       "date": "2026-10-13",
@@ -19,8 +19,8 @@
       "date": "2026-10-20",
       "date_display": "20.10.2026",
       "day": "الثلاثاء",
-      "price": 540.0,
-      "flight_no": "SR124"
+      "price": null,
+      "flight_no": null
     },
     {
       "date": "2026-10-24",
