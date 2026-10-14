@@ -1,13 +1,6 @@
 {
-  "generated_at": "2026-10-13 23:07",
+  "generated_at": "2026-10-14 03:01",
   "outbound": [
-    {
-      "date": "2026-10-13",
-      "date_display": "13.10.2026",
-      "day": "الثلاثاء",
-      "price": null,
-      "flight_no": null
-    },
     {
       "date": "2026-10-17",
       "date_display": "17.10.2026",
@@ -374,13 +367,6 @@
     }
   ],
   "inbound": [
-    {
-      "date": "2026-10-13",
-      "date_display": "13.10.2026",
-      "day": "الثلاثاء",
-      "price": null,
-      "flight_no": null
-    },
     {
       "date": "2026-10-17",
       "date_display": "17.10.2026",
