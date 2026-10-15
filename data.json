@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15 11:06",
+  "generated_at": "2026-10-15 16:48",
   "outbound": [
     {
       "date": "2026-10-17",
@@ -54,7 +54,7 @@
       "date": "2026-11-10",
       "date_display": "10.11.2026",
       "day": "الثلاثاء",
-      "price": 340.0,
+      "price": 350.0,
       "flight_no": "SR124"
     },
     {
@@ -75,7 +75,7 @@
       "date": "2026-11-21",
       "date_display": "21.11.2026",
       "day": "السبت",
-      "price": 300.0,
+      "price": 320.0,
       "flight_no": "SR196"
     },
     {
@@ -89,14 +89,14 @@
       "date": "2026-11-28",
       "date_display": "28.11.2026",
       "day": "السبت",
-      "price": 300.0,
+      "price": 320.0,
       "flight_no": "SR196"
     },
     {
       "date": "2026-12-01",
       "date_display": "01.12.2026",
       "day": "الثلاثاء",
-      "price": 300.0,
+      "price": 320.0,
       "flight_no": "SR124"
     },
     {
@@ -406,8 +406,8 @@
       "date": "2026-11-03",
       "date_display": "03.11.2026",
       "day": "الثلاثاء",
-      "price": null,
-      "flight_no": null
+      "price": 540.0,
+      "flight_no": "SR125"
     },
     {
       "date": "2026-11-07",
@@ -420,7 +420,7 @@
       "date": "2026-11-10",
       "date_display": "10.11.2026",
       "day": "الثلاثاء",
-      "price": 390.0,
+      "price": 420.0,
       "flight_no": "SR125"
     },
     {
@@ -434,21 +434,21 @@
       "date": "2026-11-17",
       "date_display": "17.11.2026",
       "day": "الثلاثاء",
-      "price": 350.0,
+      "price": 370.0,
       "flight_no": "SR125"
     },
     {
       "date": "2026-11-21",
       "date_display": "21.11.2026",
       "day": "السبت",
-      "price": 340.0,
+      "price": 360.0,
       "flight_no": "SR197"
     },
     {
       "date": "2026-11-24",
       "date_display": "24.11.2026",
       "day": "الثلاثاء",
-      "price": 330.0,
+      "price": 340.0,
       "flight_no": "SR125"
     },
     {
@@ -483,7 +483,7 @@
       "date": "2026-12-12",
       "date_display": "12.12.2026",
       "day": "السبت",
-      "price": 270.0,
+      "price": 280.0,
       "flight_no": "SR197"
     },
     {
@@ -518,7 +518,7 @@
       "date": "2026-12-29",
       "date_display": "29.12.2026",
       "day": "الثلاثاء",
-      "price": 300.0,
+      "price": 320.0,
       "flight_no": "SR125"
     },
     {
@@ -707,7 +707,7 @@
       "date": "2027-04-03",
       "date_display": "03.04.2027",
       "day": "السبت",
-      "price": 320.0,
+      "price": 330.0,
       "flight_no": "SR197"
     },
     {
