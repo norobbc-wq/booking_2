@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-18 22:47",
+  "generated_at": "2026-11-19 04:02",
   "outbound": [
     {
       "date": "2026-11-21",
@@ -12,8 +12,8 @@
       "date": "2026-11-24",
       "date_display": "24.11.2026",
       "day": "الثلاثاء",
-      "price": 190.0,
-      "flight_no": "SR124"
+      "price": null,
+      "flight_no": null
     },
     {
       "date": "2026-11-28",
@@ -385,8 +385,8 @@
       "date": "2026-11-28",
       "date_display": "28.11.2026",
       "day": "السبت",
-      "price": 290.0,
-      "flight_no": "SR197"
+      "price": null,
+      "flight_no": null
     },
     {
       "date": "2026-12-01",
